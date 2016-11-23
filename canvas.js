@@ -20,7 +20,34 @@ function Node(obj){
 }
 
 Node.prototype = {
-	this.init()
+	init: function(){
+		var t = this;
+
+		t.ctx.beginPath();
+		t.roundedRect(0, 0, 50, 50, 100);
+		t.ctx.strokeStyle = 'blue';
+		t.ctx.fillStyle = 'red';
+		t.ctx.stroke();
+		t.ctx.fill();
+	},
+	roundedRect: function(cornerX, cornerY, width, height, cornerRadius) {
+		var t = this;
+		if(width > 0){
+			t.ctx.moveTo(cornerX + cornerRadius, cornerY);
+		}else{
+			t.ctx.moveTo(cornerX - cornerRadius, cornerY);
+		}
+		t.ctx.arcTo(cornerX+width,cornerY,cornerX + width,cornerY+height,cornerRadius);
+		t.ctx.arcTo(cornerX+width,cornerY + height,cornerX,cornerY+height,cornerRadius);
+		t.ctx.arcTo(cornerX,cornerY+height,cornerX,cornerY,cornerRadius);
+		
+		if(width> 0) {
+			t.ctx.arcTo(cornerX,cornerY,cornerX+cornerRadius,cornerY,cornerRadius);
+		}
+		else{
+			t.ctx.arcTo(cornerX,cornerY,cornerX-cornerRadius,cornerY,cornerRadius);
+		}
+	}
 }
 
 
@@ -31,14 +58,18 @@ function CanvasTree(obj){
 	this.ctx = this.canvas.getContext('2d');
 	this.width = obj.width;
 	this.height = obj.height;
-	this.data = obj.data.departmentStructure;
+	this.data = obj.data.data.departmentStructure;
 
 	this.canvas.width = this.width;
 	this.canvas.height = this.height;
+
+	this.init();
+	this.start();
 }
 
-CanvasTree.proptotype = {
+CanvasTree.prototype = {
 	init:function(){
+		var t = this;
 		//遍历data，加上编号
 		t.tryNode = new Node(this.data);
 		
@@ -52,7 +83,8 @@ CanvasTree.proptotype = {
             if(!t.loop){return;}
             t.ctx.clearRect(0,0,t.canvas.width,t.canvas.height);
             
-            ctx.drawImage(t.tryNode,0,0)
+            //主循环体
+            t.ctx.drawImage(t.tryNode,0,0)
 
 
             raf(ani);
