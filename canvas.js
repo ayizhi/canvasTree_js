@@ -10,6 +10,17 @@ function Node(obj){
 	this.children = obj.children;
 	this.startX = obj.startX;
 	this.startY = obj.startY;
+	this.canvas = document.createElement('canvas');
+	this.ctx = this.canvas.getContext('2d');
+	this.canvas.width = 100;
+	this.canvas.height = 100;
+	this.init();
+
+	return this.canvas
+}
+
+Node.prototype = {
+	this.init()
 }
 
 
@@ -29,6 +40,7 @@ function CanvasTree(obj){
 CanvasTree.proptotype = {
 	init:function(){
 		//遍历data，加上编号
+		t.tryNode = new Node(this.data);
 		
 	},
 
@@ -40,6 +52,9 @@ CanvasTree.proptotype = {
             if(!t.loop){return;}
             t.ctx.clearRect(0,0,t.canvas.width,t.canvas.height);
             
+            ctx.drawImage(t.tryNode,0,0)
+
+
             raf(ani);
         }
         ani();
