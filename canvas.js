@@ -148,7 +148,7 @@ CanvasTree.prototype = {
 		var len = self.children.length
 		if(self.children && self.children.length){
 			for( i = 0;i<len;i++){
-				var child = 
+				var child =
 			}
 		}
 	},
