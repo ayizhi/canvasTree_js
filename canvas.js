@@ -20,6 +20,9 @@ function NodeTree(obj){
 	this.canvas.height = this.height;
 	this.skin = obj.skin;
 	this.textColor = obj.textColor;
+	this.ratio = obj.ratio;
+	this.fontSize = 11 * this.ratio;
+
 	this.init();
 	this.iteratorChildren(obj);
 
@@ -30,23 +33,23 @@ NodeTree.prototype = {
 	//画每个节点
 	init: function(){
 		var t = this;
-		
+
 		//背景
 		t.ctx.beginPath();
-		t.roundedRect(0, 0, t.canvas.width, t.canvas.height, 5);
+		t.roundedRect(0, 0, t.canvas.width, t.canvas.height, 8);
 		t.ctx.strokeStyle = '#fff';
 		t.ctx.fillStyle = t.skin;
 		t.ctx.stroke();
 		t.ctx.fill();
 
 		//字体
-		t.ctx.font = '10px';
+		t.ctx.font = t.fontSize + 'px serif';
 		t.ctx.fillStyle = t.textColor;
 		t.ctx.textAlign = 'center';    //start, end, left, right or center
 		t.ctx.textBaseline = 'middle'
-		t.ctx.fillText(t.name,t.width/2,15);
-		t.ctx.fillText(t.count,t.width/2,30);
-		t.ctx.fillText(t.admin,t.width/2,45);
+		t.ctx.fillText(t.name,t.width/2,t.height/4);
+		t.ctx.fillText(t.count,t.width/2,t.height/2);
+		t.ctx.fillText(t.admin,t.width/2,t.height*3/4);
 	},
 
 	//迭代数据，make 一个内有信息 ＋ canvas的数据树
@@ -68,10 +71,6 @@ NodeTree.prototype = {
 					textColor:t.textColor,
 				})))
 			}
-			
-			console.log('=====')
-
-			console.log(t.children)
 		}
 	},
 
@@ -105,8 +104,14 @@ function CanvasTree(obj){
 	this.width = obj.width;
 	this.height = obj.height;
 	this.data = obj.data.data.departmentStructure;
-	this.nodeHeight = 60;
-	this.nodeWidth = 100;
+
+	//需要自行定义的属性
+	this.nodeHeight = obj.nodeHeight || 60;
+	this.nodeWidth = obj.nodeWidth || 100;
+	this.ratio = obj.ratio || 2;
+	this.skin = obj.skin;
+	this.textColor = obj.textColor;
+	this.ifSimple = obj.ifSimple;
 
 	this.canvas.width = this.width;
 	this.canvas.height = this.height;
@@ -119,12 +124,16 @@ CanvasTree.prototype = {
 	init:function(){
 		var t = this;
 		//遍历data，加上编号
-		t.tree = new NodeTree($.extend(this.data,{
-			width: '110',
-			height: '60',
-			skin:'pink',
-			textColor:'#fff',
+		t.tree = new NodeTree($.extend(t.data,{
+			width: t.nodeWidth * t.ratio,
+			height: t.nodeHeight * t.ratio,
+			skin: t.skin,
+			textColor: t.textColor,
+			ifSimple: t.ifSimple,
+			ratio: t.ratio
 		}));
+
+		console.log(0,0,t.tree.width,t.tree.height,0,0,t.nodeWidth,t.nodeHeight)
 
 	},
 
@@ -137,7 +146,7 @@ CanvasTree.prototype = {
             t.ctx.clearRect(0,0,t.canvas.width,t.canvas.height);
             
             //主循环体
-            t.ctx.drawImage(t.tree.canvas,0,0,100,50)
+            t.ctx.drawImage(t.tree.canvas,0,0,t.tree.width,t.tree.height,0,0,t.nodeWidth,t.nodeHeight)
 
 
             raf(ani);
@@ -154,4 +163,11 @@ CanvasTree.prototype = {
 new CanvasTree({
 	width:600,
 	height:400,
-	data:data})
+	ifSimple:'',//''/'simple'
+	textColor:'#fff',
+	skin:'pink',
+	nodeHeight: 60,
+	nodeWidth: 110,
+	data:data,
+
+})
