@@ -1,4 +1,4 @@
-data = JSON.parse('{"status":true,"message":"获取数据成功","data":{"departmentStructure":{"id":"e3caf5225fb141e3b2a754414a215ec1","admin_id":"370fee2c65b911e688db00163e00371a","admin_name":"老大","name":"薪人薪事-z梦","parent_id":"0","is_root":1,"employee_count":5,"regular_count":3,"labour_count":2,"children_ids":["380a8af9f6f44dad92d09304ba1ae2b5","412461299f214698baf40b9b007031fc","4d44c0ed119347ab952fee02d9cdf5dc","89c73cdbc93a43408bdc6de31b83ba40","9de2611c714e406dbce2ef05b054d7e0","b6101c5f0caa47c287e9b666c0f27d1f"],"division_id":"","division_settable":false,"children":[{"id":"b6101c5f0caa47c287e9b666c0f27d1f","admin_id":"0","admin_name":"","name":"qwe","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["8053241433c1482f86c2199936ef93af"],"division_id":"","division_settable":true,"children":[{"id":"8053241433c1482f86c2199936ef93af","admin_id":"0","admin_name":"","name":"123","parent_id":"b6101c5f0caa47c287e9b666c0f27d1f","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["66ed047d2d2d420d8161288fa1ed5d34"],"division_id":"","division_settable":true,"children":[{"children":[{"id":"1b806c63fa3448d5a1b612f7eedf9096","admin_id":"0","admin_name":"","name":"hdfgd","parent_id":"66ed047d2d2d420d8161288fa1ed5d34","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":true,"employee_count_with_sub":0}],"id":"66ed047d2d2d420d8161288fa1ed5d34","admin_id":"0","admin_name":"","name":"fsg","parent_id":"8053241433c1482f86c2199936ef93af","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["1b806c63fa3448d5a1b612f7eedf9096"],"division_id":"","division_settable":true,"employee_count_with_sub":0}],"employee_count_with_sub":0}],"employee_count_with_sub":0},{"children":[{"id":"4a156fdfc57f4b4c940774fe52cfbd95","admin_id":"0","admin_name":"","name":"gfgsd","parent_id":"412461299f214698baf40b9b007031fc","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":false,"employee_count_with_sub":0},{"id":"17ff8367c9974d7283e02340c8770d05","admin_id":"0","admin_name":"","name":"qweq","parent_id":"412461299f214698baf40b9b007031fc","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":false,"employee_count_with_sub":0}],"id":"412461299f214698baf40b9b007031fc","admin_id":"0","admin_name":"","name":"hjk","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["17ff8367c9974d7283e02340c8770d05","4a156fdfc57f4b4c940774fe52cfbd95"],"division_id":"5a432442ed61493697745a45e3decdb0","division_settable":false,"employee_count_with_sub":0},{"children":[{"id":"fa1b64be6c484248a74dad5a5b4608cd","admin_id":"0","admin_name":"","name":"hjg","parent_id":"4d44c0ed119347ab952fee02d9cdf5dc","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"bacb20f724b3437f83df83c3b4393031","division_settable":false,"employee_count_with_sub":0},{"id":"ca0233937d2648bd90414e23f372c604","admin_id":"0","admin_name":"","name":"hgf","parent_id":"4d44c0ed119347ab952fee02d9cdf5dc","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["100a3b45d8a4417c92689edd0415e697"],"division_id":"b70aed9a8c8f4313936d19491d315df2","division_settable":false,"children":[{"children":[{"id":"96e74772967847aeb92772df5fc1182a","admin_id":"0","admin_name":"","name":"nncvb","parent_id":"100a3b45d8a4417c92689edd0415e697","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":false,"employee_count_with_sub":0}],"id":"100a3b45d8a4417c92689edd0415e697","admin_id":"0","admin_name":"","name":"qweafsd","parent_id":"ca0233937d2648bd90414e23f372c604","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["96e74772967847aeb92772df5fc1182a"],"division_id":"","division_settable":false,"employee_count_with_sub":0}],"employee_count_with_sub":0}],"id":"4d44c0ed119347ab952fee02d9cdf5dc","admin_id":"0","admin_name":"","name":"中关村","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":3,"regular_count":3,"labour_count":0,"children_ids":["ca0233937d2648bd90414e23f372c604","fa1b64be6c484248a74dad5a5b4608cd"],"division_id":"","division_settable":false,"employee_count_with_sub":3},{"children":[{"id":"e95ebeb21d364892a29bb172ed83dda2","admin_id":"370fee2c65b911e688db00163e00371a","admin_name":"老大","name":"总裁办－二级1","parent_id":"380a8af9f6f44dad92d09304ba1ae2b5","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":false,"employee_count_with_sub":0},{"id":"cef8fafab99244fab8cb2c6b6c1be4f7","admin_id":"c790927b669d11e688db00163e00371a","admin_name":"加多宝","name":"秘书处","parent_id":"380a8af9f6f44dad92d09304ba1ae2b5","is_root":0,"employee_count":1,"regular_count":1,"labour_count":0,"children_ids":[],"division_id":"","division_settable":false,"employee_count_with_sub":1}],"id":"380a8af9f6f44dad92d09304ba1ae2b5","admin_id":"301143959c2a11e6adda00163e037d96","admin_name":"1231214","name":"总裁办","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":2,"regular_count":1,"labour_count":1,"children_ids":["cef8fafab99244fab8cb2c6b6c1be4f7","e95ebeb21d364892a29bb172ed83dda2"],"division_id":"821ce8dc54f147449e057170269c0ac8","division_settable":false,"employee_count_with_sub":3},{"id":"9de2611c714e406dbce2ef05b054d7e0","admin_id":"0","admin_name":"","name":"fghj","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":true,"employee_count_with_sub":0},{"id":"89c73cdbc93a43408bdc6de31b83ba40","admin_id":"0","admin_name":"","name":"dasf","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":true,"employee_count_with_sub":0}],"employee_count_with_sub":11},"leftEmployeeCount":5,"isDivisionOpen":1,"isInDivision":false}}')
+data = JSON.parse('{"status":true,"message":"获取数据成功","data":{"departmentStructure":{"id":"e3caf5225fb141e3b2a754414a215ec1","admin_id":"370fee2c65b911e688db00163e00371a","admin_name":"老大","name":"薪人薪事-z梦","parent_id":"0","is_root":1,"employee_count":7,"regular_count":4,"labour_count":3,"children_ids":["380a8af9f6f44dad92d09304ba1ae2b5","412461299f214698baf40b9b007031fc","4d44c0ed119347ab952fee02d9cdf5dc","89c73cdbc93a43408bdc6de31b83ba40","9de2611c714e406dbce2ef05b054d7e0","b6101c5f0caa47c287e9b666c0f27d1f"],"division_id":"","division_settable":false,"children":[{"children":[{"id":"4a156fdfc57f4b4c940774fe52cfbd95","admin_id":"0","admin_name":"","name":"gfgsd","parent_id":"412461299f214698baf40b9b007031fc","is_root":0,"employee_count":1,"regular_count":1,"labour_count":0,"children_ids":[],"division_id":"","division_settable":false,"employee_count_with_sub":1},{"id":"17ff8367c9974d7283e02340c8770d05","admin_id":"0","admin_name":"","name":"qweq","parent_id":"412461299f214698baf40b9b007031fc","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":false,"employee_count_with_sub":0}],"id":"412461299f214698baf40b9b007031fc","admin_id":"0","admin_name":"","name":"hjk","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["17ff8367c9974d7283e02340c8770d05","4a156fdfc57f4b4c940774fe52cfbd95"],"division_id":"5a432442ed61493697745a45e3decdb0","division_settable":false,"employee_count_with_sub":1},{"children":[{"id":"fa1b64be6c484248a74dad5a5b4608cd","admin_id":"0","admin_name":"","name":"hjg","parent_id":"4d44c0ed119347ab952fee02d9cdf5dc","is_root":0,"employee_count":2,"regular_count":1,"labour_count":1,"children_ids":[],"division_id":"bacb20f724b3437f83df83c3b4393031","division_settable":false,"employee_count_with_sub":2},{"id":"ca0233937d2648bd90414e23f372c604","admin_id":"0","admin_name":"","name":"hgf","parent_id":"4d44c0ed119347ab952fee02d9cdf5dc","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["100a3b45d8a4417c92689edd0415e697"],"division_id":"b70aed9a8c8f4313936d19491d315df2","division_settable":false,"children":[{"children":[{"id":"96e74772967847aeb92772df5fc1182a","admin_id":"0","admin_name":"","name":"nncvb","parent_id":"100a3b45d8a4417c92689edd0415e697","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":false,"employee_count_with_sub":0}],"id":"100a3b45d8a4417c92689edd0415e697","admin_id":"0","admin_name":"","name":"qweafsd","parent_id":"ca0233937d2648bd90414e23f372c604","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["96e74772967847aeb92772df5fc1182a"],"division_id":"","division_settable":false,"employee_count_with_sub":0}],"employee_count_with_sub":0}],"id":"4d44c0ed119347ab952fee02d9cdf5dc","admin_id":"0","admin_name":"","name":"中关村","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":3,"regular_count":3,"labour_count":0,"children_ids":["ca0233937d2648bd90414e23f372c604","fa1b64be6c484248a74dad5a5b4608cd"],"division_id":"","division_settable":false,"employee_count_with_sub":5},{"id":"b6101c5f0caa47c287e9b666c0f27d1f","admin_id":"0","admin_name":"","name":"qwe","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["8053241433c1482f86c2199936ef93af"],"division_id":"","division_settable":true,"children":[{"id":"8053241433c1482f86c2199936ef93af","admin_id":"0","admin_name":"","name":"123","parent_id":"b6101c5f0caa47c287e9b666c0f27d1f","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["66ed047d2d2d420d8161288fa1ed5d34"],"division_id":"","division_settable":true,"children":[{"children":[{"id":"1b806c63fa3448d5a1b612f7eedf9096","admin_id":"0","admin_name":"","name":"hdfgd","parent_id":"66ed047d2d2d420d8161288fa1ed5d34","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":true,"employee_count_with_sub":0}],"id":"66ed047d2d2d420d8161288fa1ed5d34","admin_id":"0","admin_name":"","name":"fsg","parent_id":"8053241433c1482f86c2199936ef93af","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":["1b806c63fa3448d5a1b612f7eedf9096"],"division_id":"","division_settable":true,"employee_count_with_sub":0}],"employee_count_with_sub":0}],"employee_count_with_sub":0},{"children":[{"id":"e95ebeb21d364892a29bb172ed83dda2","admin_id":"370fee2c65b911e688db00163e00371a","admin_name":"老大","name":"总裁办－二级1","parent_id":"380a8af9f6f44dad92d09304ba1ae2b5","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":false,"employee_count_with_sub":0},{"id":"cef8fafab99244fab8cb2c6b6c1be4f7","admin_id":"c790927b669d11e688db00163e00371a","admin_name":"加多宝","name":"秘书处","parent_id":"380a8af9f6f44dad92d09304ba1ae2b5","is_root":0,"employee_count":1,"regular_count":1,"labour_count":0,"children_ids":[],"division_id":"","division_settable":false,"employee_count_with_sub":1}],"id":"380a8af9f6f44dad92d09304ba1ae2b5","admin_id":"301143959c2a11e6adda00163e037d96","admin_name":"1231214","name":"总裁办","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":2,"regular_count":1,"labour_count":1,"children_ids":["cef8fafab99244fab8cb2c6b6c1be4f7","e95ebeb21d364892a29bb172ed83dda2"],"division_id":"821ce8dc54f147449e057170269c0ac8","division_settable":false,"employee_count_with_sub":3},{"id":"9de2611c714e406dbce2ef05b054d7e0","admin_id":"0","admin_name":"","name":"fghj","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":true,"employee_count_with_sub":0},{"id":"89c73cdbc93a43408bdc6de31b83ba40","admin_id":"0","admin_name":"","name":"dasf","parent_id":"e3caf5225fb141e3b2a754414a215ec1","is_root":0,"employee_count":0,"regular_count":0,"labour_count":0,"children_ids":[],"division_id":"","division_settable":true,"employee_count_with_sub":0}],"employee_count_with_sub":16},"leftEmployeeCount":7,"isDivisionOpen":1,"isInDivision":false}}')
 console.log(data);
 
 //组织架构每个小框框
@@ -22,7 +22,6 @@ function NodeTree(obj){
 	this.textColor = obj.textColor;
 	this.ratio = obj.ratio;
 	this.fontSize = 11 * this.ratio;
-
 	this.init();
 	this.iteratorChildren(obj);
 
@@ -51,6 +50,7 @@ NodeTree.prototype = {
 		t.ctx.fillText(t.count,t.width/2,t.height/2);
 		t.ctx.fillText(t.admin,t.width/2,t.height*3/4);
 	},
+
 
 	//迭代数据，make 一个内有信息 ＋ canvas的数据树
 	iteratorChildren: function(obj){
@@ -123,7 +123,7 @@ function CanvasTree(obj){
 CanvasTree.prototype = {
 	init:function(){
 		var t = this;
-		//遍历data，加上编号
+		//遍历data，变成nodeTree对象
 		t.tree = new NodeTree($.extend(t.data,{
 			width: t.nodeWidth * t.ratio,
 			height: t.nodeHeight * t.ratio,
@@ -133,9 +133,48 @@ CanvasTree.prototype = {
 			ratio: t.ratio
 		}));
 
-		console.log(0,0,t.tree.width,t.tree.height,0,0,t.nodeWidth,t.nodeHeight)
+
+		//递归nodeTree对象,给每个对象加上maxwidth属性
+		t.iteratorAllGetMaxWidth.call(t.tree);
+
+
+
 
 	},
+	//全部node递归
+	iteratorAllGetMaxWidth:function(){
+		var self = this;
+		var i;
+		var len = self.children.length
+		if(self.children && self.children.length){
+			for( i = 0;i<len;i++){
+				var child = 
+			}
+		}
+	},
+
+
+	//单个node的递归
+	iteratorGetMaxWidth:function(){
+		var self = this;
+		self.maxWidth = 0;
+		function iter(obj){
+			var i;
+			var len = obj.children.length;
+			if(obj.children && obj.children.length){
+				for(i = 0 ;i<len;i++){
+					var child = obj.children[i];
+					iter(child)
+				}
+			}else{
+				self.maxWidth++;
+			}
+		}
+		iter(self)
+	},
+
+
+
 
 	start:function(){
 		var t = this;
@@ -165,7 +204,7 @@ new CanvasTree({
 	height:400,
 	ifSimple:'',//''/'simple'
 	textColor:'#fff',
-	skin:'pink',
+	skin:'#5e1724',
 	nodeHeight: 60,
 	nodeWidth: 110,
 	data:data,
