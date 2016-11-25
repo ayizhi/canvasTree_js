@@ -10,7 +10,6 @@ function NodeTree(obj){
 	this.labour_count = obj.labour_count;
 	this.count = this.employee_count + '人（' + this.regular_count + '／' + this.labour_count + '）';
 	this.ifSimple = obj.ifSimple == 'simple' ? true : false; 
-	this.pa = obj.pa;
 	this.children = [];
 	this.canvas = document.createElement('canvas');
 	this.ctx = this.canvas.getContext('2d');
@@ -21,7 +20,7 @@ function NodeTree(obj){
 	this.skin = obj.skin;
 	this.textColor = obj.textColor;
 	this.ratio = obj.ratio;
-	this.fontSize = 11 * this.ratio;
+	this.fontSize = 11 * this.ratio
 	this.init();
 	this.iteratorChildren(obj);
 
@@ -69,6 +68,8 @@ NodeTree.prototype = {
 					height: t.height,
 					skin: t.skin,
 					textColor:t.textColor,
+					ifSimple: t.ifSimple,
+					ratio: t.ratio,
 				})))
 			}
 		}
@@ -108,6 +109,8 @@ function CanvasTree(obj){
 	//需要自行定义的属性
 	this.nodeHeight = obj.nodeHeight || 60;
 	this.nodeWidth = obj.nodeWidth || 100;
+	this.marginTop = obj.marginTop || 20;
+	this.marginLeft = obj.marginLeft || 20
 	this.ratio = obj.ratio || 2;
 	this.skin = obj.skin;
 	this.textColor = obj.textColor;
@@ -130,22 +133,67 @@ CanvasTree.prototype = {
 			skin: t.skin,
 			textColor: t.textColor,
 			ifSimple: t.ifSimple,
-			ratio: t.ratio
+			ratio: t.ratio,
 		}));
-
 
 		//递归nodeTree对象,给每个对象加上maxwidth属性
 		t.iteratorGetMaxWidth(t.tree);
 
-		//
+		//递归nodeTree对象,给每个对象加上位置信息
+		t.iteratorGetLocation(t.tree);
+
+		//获取最大宽度
+		t.maxWidthNum = t.tree.maxWidth * t.nodeWidth + t.marginLeft * (t.tree.maxWidth - 1);
+
+		//画在虚拟画布上
+		t.nodeTreeCanvas = document.createElement('canvas');
+		t.nodeTreeCtx = t.nodeTreeCanvas.getContext('2d');
+		t.nodeTreeCanvas.width = t.maxWidthNum;
+		t.nodeTreeCanvas.height = t.maxHeightNum;
+		t.getNodeTreeCanvas(t.tree);
+
+
+		console.log(t.tree)
 
 
 
 	},
 
+	getNodeTreeCanvas: function(obj){
+		var t = this;
+		var i = 0;
+		var startX = obj.startX;
+		var startY = obj.startY;
+		var tNodePic = obj.canvas;
+		var nodeWidth = t.nodeWidth;
+		var nodeHeight = t.nodeHeight;
+		var children = obj.children;
 
-	//单个node的递归
-	iteratorGetMaxWidth:function(obj){
+		//画
+		t.nodeTreeCtx.drawImage(tNodePic,0,0,obj.width,obj.height,startX,startY,nodeWidth,nodeHeight)
+
+
+		if(children && children.length){
+			var len = children.length;
+			for(;i < len;i++){
+				var child = children[i];
+
+				console.log(startX + nodeWidth/2,startY + nodeHeight,child.startX + nodeWidth/2,child.startY)
+				t.nodeTreeCtx.beginPath();
+				t.nodeTreeCtx.moveTo(startX + nodeWidth/2,startY + nodeHeight);
+				t.nodeTreeCtx.lineTo(child.startX + nodeWidth/2,child.startY);
+				t.nodeTreeCtx.lineWidth = 1;//线条的宽度
+				t.nodeTreeCtx.strokeStyle = "#999999";//线条的颜色
+				t.nodeTreeCtx.stroke();//绘制
+
+
+				t.getNodeTreeCanvas(child)
+			}
+		}
+	},
+
+	//递归获取最大宽度
+	iteratorGetMaxWidth: function(obj){
 		var t = this;
 		var w = 0;
 		if(obj.children && obj.children.length){
@@ -153,11 +201,11 @@ CanvasTree.prototype = {
 			var len = obj.children.length;
 			for(;i<len;i++){
 				var child = obj.children[i];
+				child.pa = obj;
 				w += t.iteratorGetMaxWidth(child);
+				child.left = w;//用于定位
 			}
-			//得到每个节点的最大宽度
 			obj.maxWidth = w;
-			
 			return obj.maxWidth
 		}else{
 			obj.maxWidth = 1
@@ -165,25 +213,84 @@ CanvasTree.prototype = {
 		}
 	},
 
+	//递归获取位置信息
+	iteratorGetLocation: function(obj){
+		var t = this;
+		var pa = obj.pa;
+		var children = obj.children;
+		var left = obj.left || 1;
+
+		var marginLeft = t.marginLeft;
+		var marginTop = t.marginTop;
+		var width = t.nodeWidth;
+		var height = t.nodeHeight;
+
+
+
+		if(pa){
+			var paWidth = pa.maxWidth;
+			var maxWidth = paWidth * width + marginLeft * (paWidth - 1);
+			var tWidth = obj.maxWidth;
+			left = tWidth == 1 ? left : left - tWidth/2
+
+			var paX = pa.startX;
+			var paY = pa.startY;
+			obj.startY = paY + marginTop + height;
+			if(obj.startY + height > (t.maxHeightNum || 0)){
+				t.maxHeightNum = obj.startY + height;
+			}
+
+			if(tWidth == 1 && paWidth == 1 ){
+				obj.startX = paX;
+			}else{
+				obj.startX = paX - maxWidth / 2 + (left - 1 + tWidth/2) * width + marginLeft * (left - 1 + tWidth/2)
+			}
+
+			var i=0;
+			if(children && children.length){
+				var len = children.length;
+				for(;i<len;i++){
+					var child = children[i];
+					t.iteratorGetLocation(child)
+				}
+			}
+
+		}else{
+			var maxWidth = obj.maxWidth;
+			var allWidth = maxWidth * width + marginLeft * (maxWidth - 1);
+			obj.startX = (allWidth - width)/2
+			obj.startY = 0;
+			var r = 0;
+			if(children && children.length){
+				var len = children.length;
+				for(;r<len;r++){
+					var child = children[r];
+					t.iteratorGetLocation(child)
+				}
+			}
+		}
+	},
 
 	//开始渲染
-	start:function(){
+	start: function(){
 		var t = this;
             t.loop = true;
         var raf = window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function (callback){window.setTimeout(callback, 17);};
+
+		console.log(t.nodeTreeCanvas,0,0, t.nodeTreeCanvas.width, t.nodeTreeCanvas.height,0,0,t.nodeTreeCanvas.width,t.nodeTreeCanvas.height)
 		function ani(){
             if(!t.loop){return;}
             t.ctx.clearRect(0,0,t.canvas.width,t.canvas.height);
             
             //主循环体
-            t.ctx.drawImage(t.tree.canvas,0,0,t.tree.width,t.tree.height,0,0,t.nodeWidth,t.nodeHeight)
+            t.ctx.drawImage(t.nodeTreeCanvas,0,0, t.nodeTreeCanvas.width, t.nodeTreeCanvas.height,0,0,t.nodeTreeCanvas.width,t.nodeTreeCanvas.height)
 
 
             raf(ani);
         }
         ani();
 	},
-	stop:function(){
+	stop: function(){
 		this.loop = false
 	}
 }
@@ -191,9 +298,11 @@ CanvasTree.prototype = {
 
 
 new CanvasTree({
-	width:600,
-	height:400,
-	ifSimple:'',//''/'simple'
+	width:2000,
+	height:600,
+	marginLeft:20,
+	marginTop:40,
+	ifSimple:'simple',//''/'simple'
 	textColor:'#fff',
 	skin:'#5e1724',
 	nodeHeight: 60,
