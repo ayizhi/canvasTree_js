@@ -19,7 +19,10 @@ function NodeTree(obj){
 	this.skin = obj.skin;
 	this.textColor = obj.textColor;
 	this.ratio = obj.ratio;
-	this.fontSize = 11 * this.ratio
+	this.fontSize = 11 * this.ratio;
+	this.division_id = obj.division_id;
+	this.divisionIconHeight = obj.divisionIconHeight;
+	this.divisionIconWidth = obj.divisionIconHeight * 3 / 2;
 	this.init();
 	this.iteratorChildren(obj);
 
@@ -30,6 +33,11 @@ NodeTree.prototype = {
 	//画每个节点
 	init: function(){
 		var t = this;
+		var startY = 0//事业部要用到
+		if(t.division_id){
+			startY = t.divisionIconHeight;
+			t.canvas.height += startY;
+		}
 
 		//背景
 		t.ctx.beginPath();
@@ -44,11 +52,21 @@ NodeTree.prototype = {
 		t.ctx.fillStyle = t.textColor;
 		t.ctx.textAlign = 'center';    //start, end, left, right or center
 		t.ctx.textBaseline = 'middle'
-		t.ctx.fillText(t.name,t.width/2,t.height/4);
-		t.ctx.fillText(t.count,t.width/2,t.height/2);
+		t.ctx.fillText(t.name,t.width/2,t.height/4 + startY);
+		t.ctx.fillText(t.count,t.width/2,t.height/2 + startY);
 		if(!t.ifSimple){
-			t.ctx.fillText(t.admin,t.width/2,t.height*3/4);
+			t.ctx.fillText(t.admin,t.width/2,t.height*3/4 + startY);
 		}
+	},
+
+	drawDivisionIcon: function(){
+		var t = this;
+		var division_id = t.division_id;
+		var canvas = document.createElement('canvas');
+		canvas.width =
+		var ctx = canvas.getContent('2d');
+
+
 	},
 
 
@@ -71,6 +89,7 @@ NodeTree.prototype = {
 					textColor:t.textColor,
 					ifSimple: t.ifSimple,
 					ratio: t.ratio,
+					divisionIconHeight: t.divisionIconHeight
 				})))
 			}
 		}
@@ -116,6 +135,7 @@ function CanvasTree(obj){
 	this.skin = obj.skin;
 	this.textColor = obj.textColor;
 	this.ifSimple = obj.ifSimple;
+	this.divisionIconHeight = obj.divisionIconHeight
 
 
 
@@ -131,8 +151,9 @@ CanvasTree.prototype = {
 		var t = this;
 		//遍历data，变成nodeTree对象
 		t.tree = new NodeTree($.extend(t.data,{
-			width: t.nodeWidth * t.ratio,
+			width: t.nodeWidth * t.ratio,//为了更清晰
 			height: t.nodeHeight * t.ratio,
+			divisionIconHeight: t.divisionIconHeight * t.ratio,
 			skin: t.skin,
 			textColor: t.textColor,
 			ifSimple: t.ifSimple,
@@ -144,6 +165,8 @@ CanvasTree.prototype = {
 
 		//递归nodeTree对象,给每个对象加上位置信息
 		t.iteratorGetLocation(t.tree);
+
+		console.log(t.tree)
 
 		//获取最大宽度
 		t.maxWidthNum = t.tree.maxWidth * t.nodeWidth + t.marginLeft * (t.tree.maxWidth - 1);
@@ -291,7 +314,7 @@ CanvasTree.prototype = {
 
 
 
-new CanvasTree({
+var tree = new CanvasTree({
 	width:2000,
 	height:600,
 	marginLeft:20,
@@ -301,6 +324,12 @@ new CanvasTree({
 	skin:'#5e1724',
 	nodeHeight: 60,
 	nodeWidth: 110,
+	divisionIconHeight:20,
 	data:data,
-
 })
+
+//var img = tree.nodeTreeCanvas.toDataURL("image/png"),
+//	doc = new jsPDF('l', 'pt',[tree.maxWidthNum,tree.maxHeightNum]);
+//
+//doc.addImage(img, 'JPEG', 20, 20);
+//doc.save('techumber-html-to-pdf.pdf');
