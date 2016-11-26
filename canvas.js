@@ -66,10 +66,8 @@ NodeTree.prototype = {
 	},
 
 	drawDivisionIcon: function(){
-		console.log(666)
 		var t = this;
 		var canvas = document.createElement('canvas');
-		console.log(canvas)
 		var ctx = canvas.getContext('2d');
 		canvas.width = 900;
 		canvas.height = 600;
