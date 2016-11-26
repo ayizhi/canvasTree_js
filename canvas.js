@@ -14,8 +14,6 @@ function NodeTree(obj){
 	this.ctx = this.canvas.getContext('2d');
 	this.width = obj.width;
 	this.height = obj.height;
-	this.canvas.width = this.width;
-	this.canvas.height = this.height;
 	this.skin = obj.skin;
 	this.textColor = obj.textColor;
 	this.ratio = obj.ratio;
@@ -23,8 +21,13 @@ function NodeTree(obj){
 	this.division_id = obj.division_id;
 	this.divisionIconHeight = obj.divisionIconHeight;
 	this.divisionIconWidth = obj.divisionIconHeight * 3 / 2;
+	this.canvas.width = this.width;
+	this.canvas.height =  this.division_id ? this.height + this.divisionIconHeight : this.height;
+	this.divisionIcon = this.drawDivisionIcon();
 	this.init();
 	this.iteratorChildren(obj);
+
+
 
 	return this
 }
@@ -34,14 +37,17 @@ NodeTree.prototype = {
 	init: function(){
 		var t = this;
 		var startY = 0//事业部要用到
+
 		if(t.division_id){
 			startY = t.divisionIconHeight;
-			t.canvas.height += startY;
+			//事业部icon
+			t.ctx.drawImage(t.divisionIcon,10,0, t.divisionIconWidth, t.divisionIconHeight)
 		}
+
 
 		//背景
 		t.ctx.beginPath();
-		t.roundedRect(0, 0, t.canvas.width, t.canvas.height, 8);
+		t.roundedRect(0, startY, t.width, t.height, 8);
 		t.ctx.strokeStyle = '#fff';
 		t.ctx.fillStyle = t.skin;
 		t.ctx.stroke();
@@ -60,12 +66,50 @@ NodeTree.prototype = {
 	},
 
 	drawDivisionIcon: function(){
+		console.log(666)
 		var t = this;
-		var division_id = t.division_id;
 		var canvas = document.createElement('canvas');
-		canvas.width =
-		var ctx = canvas.getContent('2d');
+		console.log(canvas)
+		var ctx = canvas.getContext('2d');
+		canvas.width = 900;
+		canvas.height = 600;
 
+		//旗杆
+		ctx.beginPath();
+		ctx.moveTo(0,0);
+		ctx.lineTo(0,canvas.height);
+		ctx.strokeStyle = t.skin;
+		ctx.fillStyle = t.skin;
+		ctx.lineWidth = 100;//线条的宽度
+		ctx.stroke();
+		ctx.fill();
+
+
+		//旗面
+		ctx.beginPath();
+		ctx.fillStyle = t.skin;
+		ctx.moveTo(40,0);
+		ctx.lineTo(800,0);
+		ctx.lineTo(750,150);
+		ctx.lineTo(800,300);
+		ctx.lineTo(10,300)
+		ctx.lineWidth = 1;//线条的宽度
+		ctx.strokeStyle = t.skin;//线条的颜色
+		ctx.stroke();//绘制
+		ctx.closePath();
+		ctx.fill();
+
+		ctx.font = '208px 宋体';
+		ctx.fillStyle = t.textColor;
+		ctx.textAlign = 'left';    //start, end, left, right or center
+		ctx.textBaseline = 'middle'
+		ctx.fillText('事业部',50,150);
+
+
+
+
+
+		return canvas;
 
 	},
 
@@ -189,8 +233,13 @@ CanvasTree.prototype = {
 		var nodeHeight = t.nodeHeight;
 		var children = obj.children;
 
+		if(obj.division_id){
+			startY -= t.divisionIconHeight;
+			nodeHeight += t.divisionIconHeight;
+		}
+
 		//画
-		t.nodeTreeCtx.drawImage(tNodePic,0,0,obj.width,obj.height,startX,startY,nodeWidth,nodeHeight)
+		t.nodeTreeCtx.drawImage(tNodePic,0,0,obj.canvas.width,obj.canvas.height,startX,startY,nodeWidth,nodeHeight)
 
 
 		if(children && children.length){
