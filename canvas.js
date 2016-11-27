@@ -86,22 +86,22 @@ NodeTree.prototype = {
 		//旗面
 		ctx.beginPath();
 		ctx.fillStyle = t.skin;
-		ctx.moveTo(40,0);
-		ctx.lineTo(800,0);
-		ctx.lineTo(750,150);
-		ctx.lineTo(800,300);
-		ctx.lineTo(10,300)
+		ctx.moveTo(40,60);
+		ctx.lineTo(700,60);
+		ctx.lineTo(650,160);
+		ctx.lineTo(700,260);
+		ctx.lineTo(10,260)
 		ctx.lineWidth = 1;//线条的宽度
 		ctx.strokeStyle = t.skin;//线条的颜色
 		ctx.stroke();//绘制
 		ctx.closePath();
 		ctx.fill();
 
-		ctx.font = '208px 宋体';
+		ctx.font = '150px 宋体';
 		ctx.fillStyle = t.textColor;
 		ctx.textAlign = 'left';    //start, end, left, right or center
 		ctx.textBaseline = 'middle'
-		ctx.fillText('事业部',50,150);
+		ctx.fillText('事业部',100,160);
 
 
 
@@ -236,26 +236,56 @@ CanvasTree.prototype = {
 			nodeHeight += t.divisionIconHeight;
 		}
 
-		//画
-		t.nodeTreeCtx.drawImage(tNodePic,0,0,obj.canvas.width,obj.canvas.height,startX,startY,nodeWidth,nodeHeight)
-
+		//虚线
+		if(obj.pa){
+			var tStartY = obj.division_id ? startY + t.divisionIconHeight : startY;
+			t.nodeTreeCtx.beginPath();
+			t.nodeTreeCtx.moveTo(startX + nodeWidth/2,tStartY);
+			t.nodeTreeCtx.lineTo(startX + nodeWidth/2,tStartY - t.marginTop/2);
+			t.nodeTreeCtx.lineWidth = 1;//线条的宽度
+			t.nodeTreeCtx.strokeStyle = "#999999";//线条的颜色
+			t.nodeTreeCtx.stroke();//绘制
+		}
+		if(obj.children && obj.children.length){
+			t.nodeTreeCtx.beginPath();
+			t.nodeTreeCtx.moveTo(startX + nodeWidth/2,startY + nodeHeight);
+			t.nodeTreeCtx.lineTo(startX + nodeWidth/2,startY + nodeHeight + t.marginTop/2);
+			t.nodeTreeCtx.lineWidth = 1;//线条的宽度
+			t.nodeTreeCtx.strokeStyle = "#999999";//线条的颜色
+			t.nodeTreeCtx.stroke();//绘制
+		}
 
 		if(children && children.length){
 			var len = children.length;
+			var startLineX,startLineY,endLineX,endLineY;
 			for(;i < len;i++){
 				var child = children[i];
 
-				t.nodeTreeCtx.beginPath();
-				t.nodeTreeCtx.moveTo(startX + nodeWidth/2,startY + nodeHeight);
-				t.nodeTreeCtx.lineTo(child.startX + nodeWidth/2,child.startY);
-				t.nodeTreeCtx.lineWidth = 1;//线条的宽度
-				t.nodeTreeCtx.strokeStyle = "#999999";//线条的颜色
-				t.nodeTreeCtx.stroke();//绘制
-
+				if(i == 0){
+					startLineX = child.startX + nodeWidth/2
+					startLineY = child.startY - t.marginTop/2
+				}
+				if(i == len - 1){
+					endLineX = child.startX + nodeWidth/2
+					endLineY = child.startY - t.marginTop/2
+				}
 
 				t.getNodeTreeCanvas(child)
 			}
+
+			if(startLineX != endLineX){
+				t.nodeTreeCtx.beginPath();
+				t.nodeTreeCtx.moveTo(startLineX,startLineY);
+				t.nodeTreeCtx.lineTo(endLineX,endLineY);
+				t.nodeTreeCtx.lineWidth = 1;//线条的宽度
+				t.nodeTreeCtx.strokeStyle = "#999999";//线条的颜色
+				t.nodeTreeCtx.stroke();//绘制
+			}
 		}
+
+
+		//画
+		t.nodeTreeCtx.drawImage(tNodePic,0,0,obj.canvas.width,obj.canvas.height,startX,startY,nodeWidth,nodeHeight)
 	},
 
 	//递归获取最大宽度
@@ -309,7 +339,7 @@ CanvasTree.prototype = {
 			if(tWidth == 1 && paWidth == 1 ){
 				obj.startX = paX;
 			}else{
-				obj.startX = paX - maxWidth / 2 + (left - 1 + tWidth/2) * width + marginLeft * (left - 1 + tWidth/2)
+				obj.startX = paX - maxWidth / 2 + (left - 1 + tWidth/2) * width + marginLeft * (left - 1 + tWidth/2) - t.marginLeft/2
 			}
 
 			var i=0;
@@ -345,7 +375,6 @@ CanvasTree.prototype = {
 		function ani(){
             if(!t.loop){return;}
             t.ctx.clearRect(0,0,t.canvas.width,t.canvas.height);
-            
             //主循环体
             t.ctx.drawImage(t.nodeTreeCanvas,0,0, t.nodeTreeCanvas.width, t.nodeTreeCanvas.height,0,0,t.nodeTreeCanvas.width,t.nodeTreeCanvas.height)
 
@@ -376,7 +405,7 @@ var tree = new CanvasTree({
 })
 
 //var img = tree.nodeTreeCanvas.toDataURL("image/png"),
-//	doc = new jsPDF('l', 'pt',[tree.maxWidthNum,tree.maxHeightNum]);
+//	doc = new jsPDF('l', 'pt',[tree.nodeTreeCanvas.width,tree.nodeTreeCanvas.height]);
 //
 //doc.addImage(img, 'JPEG', 20, 20);
 //doc.save('techumber-html-to-pdf.pdf');
